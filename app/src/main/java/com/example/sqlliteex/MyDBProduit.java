@@ -1,6 +1,8 @@
 package com.example.sqlliteex;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -30,23 +32,56 @@ public class MyDBProduit extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql);
         onCreate(sqLiteDatabase);
     }
-    public static int insert_produit(SQLiteDatabase sqLiteDatabase, PRODUIT p){
-        return 0;
+    public static long insert_produit(SQLiteDatabase sqLiteDatabase, PRODUIT p){
+        ContentValues ct = new ContentValues();
+        ct.put(COL2,p.getLibelle());
+        ct.put(COL3,p.getFamille());
+        ct.put(COL4,p.getPrixAchat());
+        ct.put(COL5,p.getPrixVente());
+        return sqLiteDatabase.insert(TABLE_NAME,null,ct);
     }
 
-    public static int update_produit(SQLiteDatabase sqLiteDatabase, PRODUIT p){
-        return 0;
+    public static long update_produit(SQLiteDatabase sqLiteDatabase, PRODUIT p){
+        ContentValues ct = new ContentValues();
+        ct.put(COL2,p.getLibelle());
+        ct.put(COL3,p.getFamille());
+        ct.put(COL4,p.getPrixAchat());
+        ct.put(COL5,p.getPrixVente());
+        return sqLiteDatabase.update(TABLE_NAME,ct,"ID = " + p.getId(),null);
     }
 
-    public static int delete_produit(SQLiteDatabase sqLiteDatabase, int id){
-        return 0;
+    public static long delete_produit(SQLiteDatabase sqLiteDatabase, int id){
+        return sqLiteDatabase.delete(TABLE_NAME,"ID = " + id,null);
     }
 
-    public static ArrayList<PRODUIT> getAllProds(SQLiteDatabase sqLiteDatabase){
-        return null;
+    public static ArrayList<PRODUIT> getAllProds(SQLiteDatabase sqLiteDatabase) {
+        ArrayList<PRODUIT> prds = new ArrayList<>();
+        Cursor cur = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        while (cur.moveToNext()) {
+            PRODUIT p = new PRODUIT();
+            p.setId(cur.getInt(0));
+            p.setLibelle(cur.getString(1));
+            p.setFamille(cur.getString(2));
+            p.setPrixAchat(cur.getDouble(3));
+            p.setPrixVente(cur.getDouble(4));
+            prds.add(p);
+        }
+        return prds;
     }
 
-    public static PRODUIT getOneProd(SQLiteDatabase sqLiteDatabase, int id){
-        return null;
+    public static PRODUIT getOneProd(SQLiteDatabase sqLiteDatabase, int id) {
+        PRODUIT p = null;
+        Cursor cur = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ID=" + id, null);
+
+        if (cur.moveToNext()) {
+            p = new PRODUIT();
+            p.setId(cur.getInt(0));
+            p.setLibelle(cur.getString(1));
+            p.setFamille(cur.getString(2));
+            p.setPrixAchat(cur.getDouble(3));
+            p.setPrixVente(cur.getDouble(4));
+        }
+        return p;
     }
 }
