@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddProduit">
+
+    <TextView
+        style="@style/titre"
+        android:text="@string/titremenu3" />
+
+    <EditText
+        android:id="@+id/addlib"
+        style="@style/zonesaisie"
+        android:hint="Libelle ...." />
+
+    <EditText
+        android:id="@+id/addfam"
+        style="@style/zonesaisie"
+        android:hint="Famille ...." />
+
+    <EditText
+        android:id="@+id/addpa"
+        style="@style/zonesaisie"
+        android:hint="Prix achat ...."
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/addpv"
+        style="@style/zonesaisie"
+        android:hint="Prix vente ...."
+        android:inputType="numberDecimal" />
+
+    <Button
+        style="@style/btnMenu"
+        android:drawableLeft="@drawable/add"
+        android:onClick="ajouterProduit"
+        android:text="Ajouter" />
+
+</LinearLayout>
