@@ -12,19 +12,20 @@
         android:text="@string/titremenu" />
 
     <Button
-        style="@style/btnMenu"
-        android:text="@string/menu1" />
+        style="@style/btnMenu.menu"
+        android:text="@string/menu1"
+        android:onClick="lstproduit"/>
 
     <Button
-        style="@style/btnMenu"
+        style="@style/btnMenu.menu"
         android:text="@string/menu2" />
 
     <Button
-        style="@style/btnMenu"
+        style="@style/btnMenu.menu"
         android:text="@string/menu3" />
 
     <Button
-        style="@style/btnMenu"
+        style="@style/btnMenu.menu"
         android:text="@string/menu4" />
 
 </LinearLayout>
